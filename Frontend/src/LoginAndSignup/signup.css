@@ -1,0 +1,20 @@
+.container {
+  height: 825px;
+  width: 1017px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 24px;
+  border: 1px solid #666666;
+  display: flex;
+  flex-direction: row;
+}
+.inputs {
+  flex: 3;
+  background-color: black;
+  height: 100%;
+}
+.image {
+  flex: 2;
+}
