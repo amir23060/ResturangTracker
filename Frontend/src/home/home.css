@@ -1,0 +1,20 @@
+.headlineImage {
+  height: 300px;
+  width: 85%;
+  background-image: url("../assets/new2.png");
+  background-position: 2px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: fill;
+  border-radius: 20px;
+}
+.visited {
+  position: absolute;
+  top: 350px;
+   left: 50%;
+  transform: translateX(-50%);
+}
