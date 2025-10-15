@@ -1,17 +1,18 @@
 .list {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 40px;
   overflow: hidden;
   position: relative;
+    width: 1610px;
 }
 .images {
   display: flex;
   flex-direction: column;
 }
 .images img {
-  height: 300px;
-  width: 250px;
+  height: 350px;
+  width: 290px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   transition: transform 0.3s ease;
