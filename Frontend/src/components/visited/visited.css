@@ -1,0 +1,58 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.images {
+  display: flex;
+  flex-direction: column;
+}
+.images img {
+  height: 300px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.images img:hover {
+  transform: scale(0.9);
+}
+.imagesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.restuName {
+  font-size: 20px;
+
+}
+.rettuCity {
+  font-size: 15px;
+  color: rgb(96, 155, 175);
+}
+.prev,
+.next {
+  background-color: transparent;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
+  margin-bottom: 55px;
+  padding: 20px;
+}
+.headlines {
+ display: flex;
+ justify-items: start;
+
+width: 92%;
+}
+.pictures {
+  flex-direction: row;
+  display: flex;
+}
