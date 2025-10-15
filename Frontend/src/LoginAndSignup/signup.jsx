@@ -14,7 +14,7 @@ export function SignUp() {
           <div className="header">
             <p className="create">Create an account</p>
             <p className="navigatetologin">
-              Already have an account? <Link>Log In</Link>
+              Already have an account? <Link to={"/login"}>Log In</Link>
             </p>
           </div>
           <div className="form">

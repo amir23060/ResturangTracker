@@ -10,7 +10,7 @@ const [password, setPassword]=useState("")
         <div className="inputs2">
             <div className="header2">
                 <p className="create2">Log in</p>
-                <p className="navigatetosignup">Dont have a account?<Link>Sign up</Link></p>
+                <p className="navigatetosignup">Dont have a account?<Link to={"/"}>Sign up</Link></p>
             </div>
             <div className="form2">
                 <div className="email2">
