@@ -1,5 +1,5 @@
-.container {
-  height: 825px;
+.container2 {
+   height: 825px;
   width: 1017px;
   position: absolute;
   top: 50%;
@@ -11,58 +11,56 @@
   flex-direction: row;
 box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
 }
-.inputs {
-  flex: 3;
+.inputs2 {
+   flex: 3;
   margin-top: 56px;
   margin-left: 56px;
   height: 100%;
   position: relative;
+    width: 534px;
 }
-.image {
+.image2 {
   flex: 2;
-  background-image: url("../assets/food.jpeg");
+  background-image: url("../assets/food2.jpeg");
   background-size: cover;
+  background-position: center;
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
 }
-.create {
-  margin: 0;
-  padding: 0;
-  font-size: 32px;
-}
-.navigatetologin {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-}
-.navigatetologin a {
-  color: black;
-}
-.form {
+
+.header2 {
+    flex-direction: column;
   display: flex;
+  gap: 0;
+  
+}
+.form2 {
+    display: flex;
   flex-direction: column;
   width: 534px;
   margin-top: 40px;
+
 }
-.name {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
+.create2 {
+    margin: 0;
   padding: 0;
+  font-size: 32px;
+}
+.navigatetosignup {
+   font-size: 16px;
   margin: 0;
+  padding: 0;
 }
-.name input {
-  height: 56px;
-  width: 259px;
-  border-radius: 12px;
-  border: 0.3px solid #666666;
-  margin: 0; /* ensure no extra space */
-  box-sizing: border-box;
-  font-size: 18px;
-  text-align: center;
+.navigatetosignup a {
+    color: black;
 }
-.email input {
-  height: 56px;
+.email2 {
+   display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+}
+.email2 input{
+      height: 56px;
   width: 534px;
   border-radius: 12px;
   border: 0.3px solid #666666;
@@ -71,18 +69,13 @@ box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
   font-size: 18px;
   text-align: center;
 }
-.email {
+.password2 {
   display: flex;
   margin-top: 30px;
   flex-direction: column;
 }
-.password {
-  display: flex;
-  margin-top: 30px;
-  flex-direction: column;
-}
-.password input {
-  height: 56px;
+.password2 input{
+      height: 56px;
   width: 534px;
   border-radius: 12px;
   border: 0.3px solid #666666;
@@ -91,13 +84,8 @@ box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
   font-size: 18px;
   text-align: center;
 }
-.header {
-  flex-direction: column;
-  display: flex;
-  gap: 0;
-}
-.form button {
-  width: 259px;
+.form2 button{
+      width: 259px;
   height: 64px;
   padding: 8px;
   border: 0.3px solid #666666;
@@ -109,7 +97,8 @@ box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
   bottom: 140px;
   right: 200px;
 transition: transform 0.3s ease;
+
 }
-.form button:hover{
+.form2 button:hover{
     transform: scale(0.9);
 }
