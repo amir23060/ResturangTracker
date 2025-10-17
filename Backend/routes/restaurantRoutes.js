@@ -182,4 +182,12 @@ router.get("/restaurants", (req, res) => {
   res.json(restaurants);
 });
 
+router.get("/restaurants/:id", (req, res) => {
+  const restaurant = restaurants.find(r => r.id === req.params.id);
+  if (!restaurant) {
+    return res.status(404).json({ error: "Restaurang not found" });
+  }
+  res.json (restaurant);
+});
+
 export default router;
