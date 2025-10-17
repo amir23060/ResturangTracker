@@ -179,12 +179,15 @@ const restaurants = [
 ];
 
 router.get("/restaurants", (req, res) => {
-  const { id } = req.params;
-  const restaurant = restaurants.find(r => r.id === id);
-  if (!restaurant) {
-    return res.status(404).json({ error: "Restaurant not found" });
-  }
   res.json(restaurants);
+});
+
+router.get("/restaurants/:id", (req, res) => {
+  const restaurant = restaurants.find(r => r.id === req.params.id);
+  if (!restaurant) {
+    return res.status(404).json({ error: "Restaurang not found" });
+  }
+  res.json (restaurant);
 });
 
 export default router;
