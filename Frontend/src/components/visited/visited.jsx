@@ -31,7 +31,12 @@ export function Visited() {
           <p>Recently visited</p>
         </div>
         <div className="pictures">
-          <button type="button" onClick={handlePrev} className="prev">
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="prev"
+            disabled={startindex == 0}
+          >
             &#10094;
           </button>
 
@@ -49,7 +54,12 @@ export function Visited() {
               ))}
           </div>
 
-          <button type="button" onClick={handleNext} className="next">
+          <button
+            type="button"
+            onClick={handleNext}
+            className="next"
+            disabled={startindex + visible >= images.length}
+          >
             &#10095;
           </button>
         </div>
