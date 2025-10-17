@@ -179,6 +179,11 @@ const restaurants = [
 ];
 
 router.get("/restaurants", (req, res) => {
+  const { id } = req.params;
+  const restaurant = restaurants.find(r => r.id === id);
+  if (!restaurant) {
+    return res.status(404).json({ error: "Restaurant not found" });
+  }
   res.json(restaurants);
 });
 
