@@ -1,12 +1,42 @@
 import React, { useState } from "react";
-import food from "../assets/food.jpeg"
 import { BrowserRouter, Route, Routes,Link } from "react-router-dom";
 import "./signup.css";
 export function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = "";
+const [password, setPassword] = useState("");
+ const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    const user = { firstName, lastName, email, password };
+
+    try {
+      const res = await fetch("http://localhost:4000/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("userID", data._id);
+        alert("Sign up successful");
+
+      } else {
+        alert(data.message || "Signup unsuccessful");
+      }
+    } catch (error) {
+      alert("Signup failed. Please try again.");
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="container">
@@ -18,7 +48,7 @@ export function SignUp() {
             </p>
           </div>
           <div className="form">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className="name">
                 <div className="firstname">
                   {" "}
