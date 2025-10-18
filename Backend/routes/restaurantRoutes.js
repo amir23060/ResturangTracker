@@ -179,11 +179,26 @@ const restaurants = [
 ];
 
 router.get("/restaurants", (req, res) => {
-  res.json(restaurants);
+  const { category, q } = req.query;
+  let result = restaurants;
+
+  if (category) {
+    const c = String(category).toLowerCase();
+    result = result.filter(r => r.categories.some(cat => cat.toLowerCase() === c));
+  }
+
+  if (q) {
+    const term = String(q).toLowerCase();
+    result = result.filter(r => r.name.toLowerCase().includes(term) || r.locations.some( loc => loc.address.toLowerCase().includes(term))
+  );
+  }
+
+  res.json(result);
 });
 
 router.get("/restaurants/:id", (req, res) => {
-  const restaurant = restaurants.find(r => r.id === req.params.id);
+  const { id } = req.params;
+  const restaurant = restaurants.find(r => r.id === id);
   if (!restaurant) {
     return res.status(404).json({ error: "Restaurang not found" });
   }
