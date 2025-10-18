@@ -14,5 +14,8 @@ connectDb()
 app.get("/", (req, res) => {
     res.json({ ok: true });
 });
+app.listen( process.env.PORT, () => {
+    console.log("Server is running on port " + (process.env.PORT));
+});
 
 export default app;
