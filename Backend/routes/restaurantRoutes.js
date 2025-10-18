@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { listRestaurants, getRestaurantById, listCategories }  from "../controllers/restaurantController.js";
+import { listRestaurants, getRestaurantById, listCategories, dbHealth }  from "../controllers/restaurantController.js";
 
 const router = Router();
 
+router.get("/health", dbHealth);
 router.get("/restaurants", listRestaurants);
 
 router.get("/restaurants/:id", getRestaurantById);

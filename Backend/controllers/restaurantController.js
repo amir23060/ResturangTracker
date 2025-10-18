@@ -1,4 +1,7 @@
 import { restaurants } from "../Restaurants.js";
+import mongoose from "mongoose";
+import Restaurant from "../models/Restaurant.js";
+
 
 export function listRestaurants(req, res) {
   const { category, q } = req.query;
@@ -35,4 +38,14 @@ export function listCategories(req, res) {
         for (const c of r.categories) set.add(c);
     }
     res.json(Array.from(set).sort());
+}
+
+export async function dbHealth(req, res) {
+  const state = mongoose.connection.readyState;
+  let count = null;
+  try {
+    count = await Restaurant.estimatedDocumentCount();
+  } catch (e) {
+  }
+  res.json({ ok: state === 1, state, count });
 }
