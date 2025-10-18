@@ -5,6 +5,7 @@ dotenv.config()
 
 import restaurantRoutes from "../routes/restaurantRoutes.js";
 import connectDb from "../config/database.js";
+import userRouter from "../routes/userRoutes.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,5 +18,5 @@ app.get("/", (req, res) => {
 app.listen( process.env.PORT, () => {
     console.log("Server is running on port " + (process.env.PORT));
 });
-
+app.use("/api",userRouter)
 export default app;
