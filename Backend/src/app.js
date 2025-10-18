@@ -1,13 +1,16 @@
 import express from "express";
 import cors from "cors";
-import restaurantRoutes from "../routes/restaurantRoutes.js";
+import dotenv from "dotenv"
+dotenv.config()
 
+import restaurantRoutes from "../routes/restaurantRoutes.js";
+import connectDb from "../config/database.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use("/api", restaurantRoutes);
-
+connectDb()
 app.get("/", (req, res) => {
     res.json({ ok: true });
 });
