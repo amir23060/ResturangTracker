@@ -4,7 +4,10 @@ import { listRestaurants, getRestaurantById, listCategories }  from "../controll
 const router = Router();
 
 router.get("/restaurants", listRestaurants);
-router,get("/restaurants/:id", getRestaurantById);
+
+router.get("/restaurants/:id", getRestaurantById);
+
+
 router.get("/categories", listCategories);
 
 export default router;
