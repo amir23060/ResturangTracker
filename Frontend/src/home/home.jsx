@@ -1,6 +1,5 @@
 import React from "react";
 import "./home.css"
-import video from "../assets/video.mp4"
 
 import { Visited } from "../components/visited/visited";
 import { Navbar } from "../components/navbar/navbar";
