@@ -22,17 +22,16 @@ const {email,password}=req.body
 
 
 }
-export const getUserById=async(req,res)=>{
-    const {id}= req.params
-  try{
-    const user = await User.findById(id)
-    if(user){
-        res.json(user)
-    }
-  res.status(404).json({ message: "User not found" });
 
-  }
-  catch(error){
-    res.status(400).json({message:"failed"},error)
+export const getUserById = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await User.findById(id)
+    if (user) {
+      return res.json(user)
+    }
+    return res.status(404).json({ message: "User not found" })
+  } catch (error) {
+    return res.status(400).json({ message: "failed", error: String(error?.message || error) })
   }
 }
