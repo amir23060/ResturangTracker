@@ -1,5 +1,5 @@
 import express from "express"
-import User from "../model/userModel.js"
+import User from "Backend/models/userModel.js"
 
 export const addUser = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;

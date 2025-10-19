@@ -10,13 +10,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 4000;
+
 app.use("/api", restaurantRoutes);
-connectDb()
+app.use("/api", userRouter);
+
+connectDb();
+
 app.get("/", (req, res) => {
-    res.json({ ok: true });
+  res.json({ ok: true });
 });
-app.listen( process.env.PORT, () => {
-    console.log("Server is running on port " + (process.env.PORT));
+
+app.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
 });
-app.use("/api",userRouter)
 export default app;
