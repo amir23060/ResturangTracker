@@ -1,7 +1,8 @@
 export const restaurants = [
-    {
+  {
     id: "beer-n-fries",
     name: "BeerNFries",
+    image: "https://via.placeholder.com/800x600?text=beer-n-fries",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -14,6 +15,7 @@ export const restaurants = [
   {
     id: "dine-burgers",
     name: "DINÉ Burgers",
+    image: "https://via.placeholder.com/800x600?text=dine-burgers",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -26,6 +28,7 @@ export const restaurants = [
   {
     id: "lilla-kiosken-i-grabo",
     name: "Lilla Kiosken I Gråbo",
+    image: "https://via.placeholder.com/800x600?text=lilla-kiosken-i-grabo",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -38,6 +41,7 @@ export const restaurants = [
   {
     id: "burger-mansion-goteborg",
     name: "Burger Mansion Göteborg",
+    image: "https://via.placeholder.com/800x600?text=burger-mansion-goteborg",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -50,6 +54,7 @@ export const restaurants = [
   {
     id: "burger-mansion-backaplan",
     name: "Burger Mansion Backaplan",
+    image: "https://via.placeholder.com/800x600?text=burger-mansion-backaplan",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -62,6 +67,7 @@ export const restaurants = [
   {
     id: "os-street-food",
     name: "O’s Street Food",
+    image: "https://via.placeholder.com/800x600?text=os-street-food",
     categories: ["Smashburgare"],
     locations: [
       {
@@ -79,6 +85,7 @@ export const restaurants = [
   {
     id: "the-barn",
     name: "The Barn",
+    image: "https://via.placeholder.com/800x600?text=the-barn",
     categories: ["Gourmetburgare"],
     locations: [
       {
@@ -91,6 +98,7 @@ export const restaurants = [
   {
     id: "restaurant-2112",
     name: "Restaurant 2112",
+    image: "https://via.placeholder.com/800x600?text=restaurant-2112",
     categories: ["Gourmetburgare"],
     locations: [
       {
@@ -103,6 +111,7 @@ export const restaurants = [
   {
     id: "holy-cow",
     name: "Holy Cow",
+    image: "https://via.placeholder.com/800x600?text=holy-cow",
     categories: ["Klassiska burgare", "Pubkänsla"],
     locations: [
       {
@@ -115,6 +124,7 @@ export const restaurants = [
   {
     id: "tugg-burgers-goteborg",
     name: "Tugg Burgers Göteborg",
+    image: "https://via.placeholder.com/800x600?text=tugg-burgers-goteborg",
     categories: ["Klassiska burgare", "Pubkänsla"],
     locations: [
       {
@@ -127,6 +137,7 @@ export const restaurants = [
   {
     id: "beerista",
     name: "Beerista",
+    image: "https://via.placeholder.com/800x600?text=beerista",
     categories: ["Klassiska burgare", "Pubkänsla"],
     locations: [
       {
@@ -139,6 +150,7 @@ export const restaurants = [
   {
     id: "goteburgare-vegan",
     name: "Göteburgare Vegan",
+    image: "https://via.placeholder.com/800x600?text=goteburgare-vegan",
     categories: ["Veganska burgare"],
     locations: [
       {
@@ -151,6 +163,7 @@ export const restaurants = [
   {
     id: "stockyard-burger-joint",
     name: "Stockyard Burger Joint",
+    image: "https://via.placeholder.com/800x600?text=stockyard-burger-joint",
     categories: ["Specialburgare"],
     locations: [
       {
@@ -163,6 +176,7 @@ export const restaurants = [
   {
     id: "the-burger-beer-stuff",
     name: "The Burger Beer & Stuff",
+    image: "https://via.placeholder.com/800x600?text=the-burger-beer-stuff",
     categories: ["Specialburgare"],
     locations: [
       {
