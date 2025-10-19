@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./login.css"
 import { Link, useNavigate } from "react-router-dom";
+import { PopUp } from "../components/popUp/popUp";
 export function LogIn (){
 const [email,setEmail]= useState("")
 const [password, setPassword]=useState("")
 const navigate = useNavigate()
+const [message,setMessage]=useState("")
 const handleSubmit=async(e)=>{
+    
 e.preventDefault()
 const user ={email,password}
 try{
@@ -19,21 +22,21 @@ const data = await res.json()
 if(res.ok){
     localStorage.setItem("userID", data.user._id)
     localStorage.setItem("token",data.token)
-    alert(data.message)
-    navigate(`/home/${data.user._id}`)
+    setMessage(data.message)
+    setTimeout(() => navigate(`/home/${data.user._id}`), 1000);
 } else {
-  alert(data.message || "Invalid email or password");
+  setMessage(data.message || "Invalid email or password");
 }
 
 
 }catch(error){
     console.log(error)
-    alert("somthing went wrong")
+    setMessage("somthing went wrong")
 }
 
 }
     return(<>
-    
+{message && <PopUp message={message}  />}
     <div className="container2 ">
         <div className="inputs2">
             <div className="header2">
