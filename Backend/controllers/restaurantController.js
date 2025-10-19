@@ -1,51 +1,53 @@
-import { restaurants } from "../Restaurants.js";
 import mongoose from "mongoose";
-import Restaurant from "../models/Restaurant.js";
+import Restaurant from "../models/restaurantModel.js";
 
+export async function listRestaurants(req, res) {
+    try {
+        const { category, q } = req.query;
+        const filter = {};
+        if (category) filter.categories = new RegExp(`^${escapeRegex(String(category))}$`, "i");
+        if (q) filter.$or = [
+            { name: { $regex: q, $options: "i" } },
+            { "locations.address": { $regex: q, $options: "i" } }
+        ];
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 20;
 
-export function listRestaurants(req, res) {
-  const { category, q } = req.query;
-  let result = restaurants;
+        const docs = await Restaurant.find(filter)
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean();
 
-  if (category) {
-    const c = String(category).toLowerCase();
-    result = result.filter(r => r.categories.some(cat => cat.toLowerCase() === c));
-  }
-
-  if (q) {
-    const term = String(q).toLowerCase();
-    result = result.filter(r =>
-      r.name.toLowerCase().includes(term) ||
-      r.locations.some(loc => loc.address.toLowerCase().includes(term))
-    );
-  }
-
-  res.json(result);
-}
-
-export function getRestaurantById(req, res ) {
-    const { id } = req.params;
-    const restaurant = restaurants.find(r => r.id === id);
-    if (!restaurant) {
-        return res.status(404).json({ error: "Restaurant not found" });
+        res.json(docs);
+    } catch {
+        res.status(500).json({ error: "Failed to list restaurants" });
     }
-    res.json(restaurant);
 }
 
-export function listCategories(req, res) {
-    const set = new Set();
-    for (const r of restaurants) {
-        for (const c of r.categories) set.add(c);
+export async function getRestaurantById(req, res) {
+    try {
+        const r = await Restaurant.findOne({ id: req.params.id }).lean();
+        if (!r) return res.status(404).json({ error: "Restaurant not found" });
+        res.json(r);
+    } catch {
+        res.status(500).json({ error: "Failed to get restaurant" });
     }
-    res.json(Array.from(set).sort());
 }
 
-export async function dbHealth(req, res) {
-  const state = mongoose.connection.readyState;
-  let count = null;
-  try {
-    count = await Restaurant.estimatedDocumentCount();
-  } catch (e) {
-  }
-  res.json({ ok: state === 1, state, count });
+export async function listCategories(_req, res) {
+    try {
+        const cats = await Restaurant.distinct("categories");
+        res.json(cats.sort());
+    } catch {
+        res.status(500).json({ error: "Failed to list categories" });
+    }
+}
+
+export function dbHealth(_req, res) {
+    const state = mongoose.connection.readyState;
+    res.json({ ok: state === 1, state });
+}
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
