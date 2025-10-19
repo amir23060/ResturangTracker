@@ -5,4 +5,4 @@ const userRouter = Router();
 userRouter.post("/" ,addUser)
 userRouter.post("/login",getUser)
 userRouter.get("/:id",verifyToken,getUserById)
-export default userRouter
+export default userRouter;
