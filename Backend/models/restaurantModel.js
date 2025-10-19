@@ -5,22 +5,19 @@ export const ratingSchema = new mongoose.Schema({
   count: { type: Number, min: 0 },
 }, { _id: false });
 
-export const locationsSchema = new mongoose.Schema({
+const locationSchema = new mongoose.Schema({
   address: { type: String, required: true },
-  city: { type: String, required: true },
-  coordinates: {
-    lat: { type: Number, required: true },
-    lng: { type: Number, required: true },
-  },
+  hours: { type: String, required: true },
+  rating: { type: ratingSchema, required: true }
 }, { _id: false });
 
-
 const restaurantSchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true, index: true },
   name: { type: String, required: true },
-  cuisine: { type: String },
-  location: locationsSchema,
-  rating: ratingSchema,
-});
+  image: { type: String },
+  categories: { type: [String], default: [] },
+  locations: { type: [locationSchema], default: [] }
+}, { timestamps: true });
 
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);

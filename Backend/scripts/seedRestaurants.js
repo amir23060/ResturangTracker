@@ -9,14 +9,30 @@ async function run() {
     await connectDb();
     let inserted = 0, updated = 0;
     for (const r of restaurants) {
-        const res = await Restaurant.updatedOne (
-            { id: r.id },
-            { $set: r },
-            { upsert: true }
-        )
-        if (res.upsertedCount) inserted += 1;  
-        else if (res.modifiedCount) updated += 1;  
+
+    if (!r.image) {
+        r.image = "https://via.placeholder.com/600x400?text=Restaurant";
     }
+
+    if (Array.isArray(r.locations)) {
+        r.locations = r.locations.map(loc => {
+            if (loc.adress && !loc.address) {
+                loc.address = loc.adress;
+                delete loc.adress;
+            }
+            return loc;
+        });
+    }
+
+    const res = await Restaurant.updateOne(
+        { id: r.id },
+        { $set: r },
+        { upsert: true }
+    );
+
+    if (res.upsertedCount) inserted += 1;
+    else if (res.modifiedCount) updated += 1;
+}
     console.log(`Seed done. Inserted: ${inserted}, Updated: ${updated}`);
     process.exit(0);
 }
