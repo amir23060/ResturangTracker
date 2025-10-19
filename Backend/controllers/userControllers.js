@@ -1,37 +1,86 @@
-import express from "express"
-import User from "../model/userModel.js"
-export const addUser=async(req,res)=>{
-  const {firstName,lastName,email,password }=req.body
-  const newUser= new User({firstName,lastName,email,password})
-  await newUser.save()
-  res.json(newUser)
-}
-export const getUser=async(req,res)=>{
-const {email,password}=req.body
-    const user = await User.findOne({ email });
+import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import User from "../models/userModel.js";
 
-    if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-    if(user.password === password){
-        res.json(user)
-    }
-    else{
-        res.status(404).json({message:"failed"})
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+
+export const addUser = async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Email already in use, try logging in" });
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ firstName, lastName, email, password: hashedPassword });
+    await newUser.save();
 
-}
+    const token = jwt.sign(
+      { id: newUser._id, email: newUser.email },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    const { password: _, ...userWithoutPassword } = newUser.toObject();
+
+    return res.status(201).json({
+      user: userWithoutPassword,
+      token,
+      message: "Account successfully created",
+    });
+  } catch (error) {
+    console.error("Error adding user:", error);
+    return res.status(500).json({ message: "Cannot add a new user" });
+  }
+};
+
+export const getUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return res.status(400).json({ message: "Incorrect email" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Incorrect email or password" });
+    }
+
+    const token = jwt.sign(
+      { id: existingUser._id, email: existingUser.email },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    const { password: _, ...userWithoutPassword } = existingUser.toObject();
+
+    return res.status(200).json({
+      user: userWithoutPassword,
+      token,
+      message: "Login successful",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
 
 export const getUserById = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const user = await User.findById(id)
-    if (user) {
-      return res.json(user)
+    const user = await User.findById(id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    return res.status(404).json({ message: "User not found" })
+    return res.status(200).json(user);
   } catch (error) {
-    return res.status(400).json({ message: "failed", error: String(error?.message || error) })
+    return res.status(400).json({ message: "Failed to get user", error });
   }
-}
+};
