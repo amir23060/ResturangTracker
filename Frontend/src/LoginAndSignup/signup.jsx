@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes,Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes,Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 export function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+const navigate = useNavigate()
  const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,8 +27,11 @@ const [password, setPassword] = useState("");
       const data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("userID", data._id);
-        alert("Sign up successful");
+        localStorage.setItem("userID", data.user._id);
+        localStorage.setItem("token", data.token)
+        alert(data.message);
+         navigate(`/home/${data.user._id}`)
+        
 
       } else {
         alert(data.message || "Signup unsuccessful");
@@ -57,6 +61,7 @@ const [password, setPassword] = useState("");
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="lastname">
@@ -65,16 +70,17 @@ const [password, setPassword] = useState("");
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    required
                   />
                 </div>
               </div>
               <div className="email">
                 <label htmlFor="">Email</label>
-                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} />
+                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required />
               </div>
               <div className="password"> 
                 <label htmlFor="">Password</label>
-                <input type="password" value={password} onChange={e=> setPassword(e.target.value)} />
+                <input type="password" value={password} onChange={e=> setPassword(e.target.value)} required />
               </div>
               <button type="submit">Create an account</button>
             </form>
