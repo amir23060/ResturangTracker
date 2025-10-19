@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+const JWT_SECRET = process.env.JWT_SECRET || "KOlKHARA"
 
 export const addUser = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -45,10 +45,12 @@ export const getUser = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
+      console.log("❌ No user found with email:", email);
       return res.status(400).json({ message: "Incorrect email" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    console.log("🔍 Password valid?", isPasswordValid);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Incorrect email or password" });
     }

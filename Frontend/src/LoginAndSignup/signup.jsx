@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes,Link, useNavigate } from "react-router-dom";
 import "./signup.css";
+import { PopUp } from "../components/popUp/popUp";
 export function SignUp() {
+  const [message,setMessage]=useState("")
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,20 +31,21 @@ const navigate = useNavigate()
       if (res.ok) {
         localStorage.setItem("userID", data.user._id);
         localStorage.setItem("token", data.token)
-        alert(data.message);
-         navigate(`/home/${data.user._id}`)
+        setMessage(data.message);
+          setTimeout(() => navigate(`/home/${data.user._id}`), 1000);
         
 
       } else {
-        alert(data.message || "Signup unsuccessful");
+        setMessage(data.message || "Signup unsuccessful");
       }
     } catch (error) {
-      alert("Signup failed. Please try again.");
+      setMessage("Signup failed. Please try again.");
       console.error(error);
     }
   };
   return (
     <>
+    <PopUp message={message}/>
       <div className="container">
         <div className="inputs">
           <div className="header">
