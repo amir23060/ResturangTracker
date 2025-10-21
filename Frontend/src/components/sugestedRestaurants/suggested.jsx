@@ -3,7 +3,7 @@ import food1 from "../../assets/food.jpeg";
 import "./suggested.css"
 import { useEffect } from "react";
 export function Suggested() {
-   
+   const [restaurants,setRestaurants]= useState([])
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +22,7 @@ export function Suggested() {
 
     fetchData(); // ✅ actually call the function
   }, []);
-  const [restaurants,setRestaurants]= useState([])
+  
   console.log(restaurants)
   const [startindex, setStartIndex] = useState(0);
   const visible = 5;
@@ -55,18 +55,24 @@ export function Suggested() {
         <div className="list">
           {restaurants.slice(startindex, startindex + visible).map((rest) => (
             <div key={rest.id} className="images">
-              <img
-                src="https://via.placeholder.com/150" // placeholder for now
-                alt={rest.name}
-              />
+            <img
+  src={
+  
+       rest.image
+    
+  }
+  alt={rest.name}
+/>
               <div className="infoArea">
                 <p className="restuName">{rest.name}</p>
-                <p className="restuCity">
-                  {rest.locations[0]?.hours || "No address available"}
-                </p>
+   <p className="restuCity">
+  {`${rest.city},${rest.address}` || "No address available"}
+</p>
+
+
                 <p className="restuRating">
-                  ⭐ {rest.locations[0]?.rating?.score} (
-                  {rest.locations[0]?.rating?.count} reviews)
+                  ⭐ {rest.openingHoures}, (
+                  {rest.googleRating} Rating ) 
                 </p>
               </div>
             </div>
